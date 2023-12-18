@@ -1,0 +1,23 @@
+.scheduler-view
+{
+    display: flex;
+}
+
+.scheduler-view > .column
+{
+    position: relative;
+    width: 50%;
+}
+
+.download-button
+{
+    text-align: left;
+    margin-left: 5%;
+    margin-top: 5%;
+}
+
+.modify-table
+{
+    position: absolute;
+    bottom: 0;
+}
