@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 
 HistoricalTable.prototype = {
@@ -8,24 +8,20 @@ HistoricalTable.prototype = {
     endingDate: PropTypes.string
 }
 
-export default function HistoricalTable(props)
+export default function HistoricalTable(symbol, startingDate, endingDate)
 {
-    const [exchangeRates, setExchangeRates] = useState([{}]);
+    const [exchangeRates, setExchangeRates] = useState([]);
 
     function myFetchFunction()
     {
-        fetch('http://localhost:8081/storage/historical/').then(
-            (response) => 
+        fetch().then((response) => 
+        {
+            if(response.ok)
             {
-                console.log(response.ok);
-                if(response.ok)
-                {
-                    setExchangeRates(response.json());
-                    console.log(exchangeRates);
-                    //mappare da response 
-                }
+                setExchangeRates(response.json());
+                console.log(exchangeRates);
             }
-        );
+        });
     }
 
     //myFetchFunction();
@@ -33,11 +29,8 @@ export default function HistoricalTable(props)
     return (
         <div>
         <TableContainer>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table sx={{ minWidth: 700 }} size='small'>
             <TableHead>
-                <TableRow>
-                    <TableCell>Symbol: {exchangeRates[0].symbol}</TableCell>
-                </TableRow>
                 <TableRow>
                     <TableCell>Date</TableCell>
                     <TableCell>Symbol</TableCell>

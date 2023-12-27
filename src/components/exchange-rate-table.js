@@ -102,7 +102,7 @@ export default function ExchangeRateTable()
     return (
         <div>
         <TableContainer component={Paper}>
-        <Table size="small">
+        <Table size="small" sx={{ minWidth: 700 }}>
             <TableHead>
                 <TableRow>
                     <TableCell>Date</TableCell>

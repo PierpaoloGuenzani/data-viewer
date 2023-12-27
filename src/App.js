@@ -1,16 +1,16 @@
 import './App.css';
-import DailyTable from './components/daily-table';
-import SchedulerTable from './components/scheduler-table';
-import HistoricalTable from './components/historical-table';
-import ExchangeRateTable from './components/exchange-rate-table';
-import DataView from './components/scheduler-view';
+import DataView from './components/data-view';
 import { Button } from '@mui/material';
 import { useState } from 'react';
 import ScheduleView from './components/scheduler-view';
+import { LoginComponent } from './components/login';
+import { useSelector } from 'react-redux';
 
 function App()
 {
   const [view , setView] = useState(<ScheduleView/>);
+
+  const value = useSelector(state => state.authentication.value);
 
   function onClickSchedule()
   {
@@ -20,7 +20,7 @@ function App()
   function onClickData()
   {
     console.log("Date click");
-    setView(<ExchangeRateTable/>);
+    setView(<DataView/>);
   }
 
   return (
@@ -28,8 +28,11 @@ function App()
       <div className="button">
         <Button variant='contained' size='large' onClick={onClickSchedule}>Schedule</Button>
         <Button variant='contained' size='large'onClick={onClickData}>Data View</Button>
-        </div>
-      {view}
+      </div>
+      {value? view : null}
+      <div className="login">
+        {value? null : <LoginComponent/>}
+      </div>
     </div>
   );
 }

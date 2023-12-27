@@ -51,10 +51,10 @@ export default function SchedulerModify()
 
     return(
         <Fragment>
-            <TextField onChange={handleChangeTaskName} label="taskName" size="small"  value={task.taskName}/>
-            <TextField onChange={handleChangeSchedulingInterval} label="schedulingInterval" size="small" value={task.schedulingInterval}/>
-            <TextField onChange={handleSchedulingType} label="schedulingType" size="small" value={task.type}/>
-            <TextField onChange={handleSchedulingState} label="schedulingState" size="small" value={task.state}/>
+            <TextField onChange={handleChangeTaskName} placeholder="taskName" size="small"  value={task.taskName}/>
+            <TextField onChange={handleChangeSchedulingInterval} placeholder="schedulingInterval" size="small" value={task.schedulingInterval}/>
+            <TextField onChange={handleSchedulingType} placeholder="schedulingType" size="small" value={task.type}/>
+            <TextField onChange={handleSchedulingState} placeholder="schedulingState" size="small" value={task.state}/>
             <Button onClick={handleClick} size="large" variant="contained">{modifyState? "Modifica Task" : "Crea Task"}</Button>
         </Fragment>
     );

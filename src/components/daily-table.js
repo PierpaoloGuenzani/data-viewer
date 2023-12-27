@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,56 +7,29 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { properties } from '../properties';
 
-DailyTable.propTypes = {
-    date : PropTypes.string.isRequired
-}
 
-export default function DailyTable(props)
+export default function DailyTable(date)
 {
-    const [data, setData] = useState([]);
-    const [exchangeRates, setExchangeRates] = useState([{}]);
-    //useEffect
+    const [exchangeRates, setExchangeRates] = useState([]);
 
     const fetchData = () => {
-        fetch(`https://dummyjson.com/products`)
+        fetch(properties.DATA_STORER_EXCHANGE_RATE+date)
           .then((response) => response.json())
-          .then((actualData) => {
-            console.log(actualData);
-            setData(actualData.products);
+          .then((data) => 
+          {
             console.log(data);
+            setExchangeRates([...exchangeRates, ...data]);
           })
-          .catch((err) => {
-            console.log(err.message);
-          });
+          .catch(err => console.log(err));
       };
-
-    function myFetchFunction()
-    {
-        fetch('http://localhost:8081/storage/exchange-rates/'+props.date).then(
-            (response) => 
-            {
-                console.log(response.ok);
-                if(response.ok)
-                {
-                    setExchangeRates(response.json());
-                    console.log(exchangeRates);
-                    //mappare da response 
-                }
-            }
-        );
-    }
-
-    //myFetchFunction();
 
     return (
         <div>
         <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table sx={{ minWidth: 700 }}  size='small'>
             <TableHead>
-                <TableRow>
-                    <TableCell>Date: {props.date}</TableCell>
-                </TableRow>
                 <TableRow>
                     <TableCell>Date</TableCell>
                     <TableCell>Symbol</TableCell>
