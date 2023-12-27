@@ -7,7 +7,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useState, useEffect, useMemo } from 'react';
 import { TablePagination } from '@mui/material';
-import { properties } from '../properties';
+import { properties } from '../../properties';
 
 export default function ExchangeRateTable()
 {

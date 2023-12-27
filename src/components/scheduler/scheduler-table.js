@@ -1,7 +1,7 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material";
 import { useState, useEffect, useContext } from "react";
 import { TaskContext } from "./scheduler-view";
-import { properties } from "../properties";
+import { properties } from "../../properties";
 
 export default function SchedulerTable()
 {

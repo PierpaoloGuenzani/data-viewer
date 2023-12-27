@@ -4,7 +4,7 @@ import { Button } from "@mui/material";
 import { createContext, useContext, useState } from "react";
 
 import "./scheduler-view.css";
-import { properties } from "../properties";
+import { properties } from "../../properties";
 
 export const TaskContext = createContext({});
 

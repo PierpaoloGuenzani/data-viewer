@@ -1,13 +1,13 @@
 import { Button, TextField } from "@mui/material";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { login, logout } from "../redux/authenticationSlice";
-import { properties } from "../properties";
-import UserForm from './user-form';
+import { login, logout } from "../../redux/authenticationSlice";
+import { properties } from "../../properties";
+import { createUserView } from "../../redux/loginSlice";
 
 export function LoginComponent()
 {
-    const [create , setCreate] = useState();
+
     const dispatch = useDispatch()
 
     const usernameRef = useRef();
@@ -32,9 +32,7 @@ export function LoginComponent()
 
     const handleCreate = () =>
     {
-        setCreate(
-            <UserForm></UserForm>
-        )
+        dispatch(createUserView())
     }
 
     return(
@@ -43,7 +41,6 @@ export function LoginComponent()
             <TextField size="small" type="password" placeholder="Password" inputRef={passwordRef}></TextField>
             <Button variant="contained" size="large" onClick={handleClick}>Login</Button>
             <Button variant="contained" size="large" onClick={handleCreate}>Create new user</Button>
-            {create}
         </div>
     );
 }
