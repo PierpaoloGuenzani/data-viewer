@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { login, logout } from "../../redux/authenticationSlice";
 import { properties } from "../../properties";
 import { createUserView } from "../../redux/loginSlice";
+import './login.css';
 
 export function LoginComponent()
 {
@@ -36,7 +37,7 @@ export function LoginComponent()
     }
 
     return(
-        <div>
+        <div className="login">
             <TextField size="small" placeholder="Username" inputRef={usernameRef}></TextField>
             <TextField size="small" type="password" placeholder="Password" inputRef={passwordRef}></TextField>
             <Button variant="contained" size="large" onClick={handleClick}>Login</Button>

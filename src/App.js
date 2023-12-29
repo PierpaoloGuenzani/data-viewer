@@ -9,7 +9,7 @@ function App()
   //inizio
   return (
     <div>
-      <div className="login">
+      <div className="main-page">
         {value? <MainPage/> : <LoginView/>}
       </div>
     </div>

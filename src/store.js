@@ -6,7 +6,7 @@ export default configureStore({
   reducer:
   {
     authentication: authenticationReducer,
-    loginView: loginReducer
+    login: loginReducer
   }
 })
 
