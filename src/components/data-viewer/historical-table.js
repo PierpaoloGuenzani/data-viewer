@@ -1,33 +1,40 @@
 import PropTypes from 'prop-types';
-import { useState, useEffect } from "react";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { useState, useEffect, useRef } from "react";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Button } from "@mui/material";
+import { properties } from '../../properties';
 
-HistoricalTable.prototype = {
+/*HistoricalTable.prototype = {
     symbol: PropTypes.string.isRequired,
     startingDate: PropTypes.string,
     endingDate: PropTypes.string
-}
+}*/
 
-export default function HistoricalTable(symbol, startingDate, endingDate)
+export default function HistoricalTable()
 {
+    const symbolRef = useRef();
     const [exchangeRates, setExchangeRates] = useState([]);
 
     function myFetchFunction()
     {
-        fetch().then((response) => 
-        {
-            if(response.ok)
+        setExchangeRates([]);
+        fetch(properties.DATA_STORER_HISTORICAL+symbolRef.current.value)
+        .then(response => response.json())
+        .then(data =>
             {
-                setExchangeRates(response.json());
-                console.log(exchangeRates);
+                console.log(data);
+                setExchangeRates([...exchangeRates,...data])
             }
-        });
+        );
     }
 
     //myFetchFunction();
 
     return (
-        <div>
+        <div className="hystorical-table">
+            <div className="daily-form">
+                <TextField size='small' label="Symbol" inputRef={symbolRef}></TextField>
+                <Button variant='outlined' onClick={myFetchFunction}>Search</Button>
+            </div>
         <TableContainer>
         <Table sx={{ minWidth: 700 }} size='small'>
             <TableHead>

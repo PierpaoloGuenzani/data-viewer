@@ -1,21 +1,16 @@
-import PropTypes from 'prop-types';
-import { useEffect, useState } from "react";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import { useRef, useState } from "react";
+import { TextField, Button, Paper, Table, TableHead, TableBody, TableContainer, TableRow, TableCell } from "@mui/material";
 import { properties } from '../../properties';
 
 
-export default function DailyTable(date)
+export default function DailyTable()
 {
-    const [exchangeRates, setExchangeRates] = useState([]);
+  const dateRef = useRef();
+  const [exchangeRates, setExchangeRates] = useState([]);
 
-    const fetchData = () => {
-        fetch(properties.DATA_STORER_EXCHANGE_RATE+date)
+  const fetchData = () => {
+    setExchangeRates([]);
+        fetch(properties.DATA_STORER_EXCHANGE_RATE+dateRef.current.value)
           .then((response) => response.json())
           .then((data) => 
           {
@@ -26,7 +21,11 @@ export default function DailyTable(date)
       };
 
     return (
-        <div>
+        <div className="daily-table">
+          <div className="daily-form">
+            <TextField size='small' label="Date" inputRef={dateRef}></TextField>
+            <Button variant='outlined' onClick={fetchData}>Search</Button>
+          </div>
         <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }}  size='small'>
             <TableHead>
