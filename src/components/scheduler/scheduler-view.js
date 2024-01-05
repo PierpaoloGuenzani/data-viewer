@@ -11,6 +11,7 @@ export const TaskContext = createContext({});
 export default function ScheduleView()
 {
     const [task, setTask] = useState({});
+    const [modifyState, setModifyState] = useState(false);
 
     const handleClick = () =>
     {
@@ -28,7 +29,7 @@ export default function ScheduleView()
 
     return(
         <div className="scheduler-view">
-            <TaskContext.Provider value={{task, setTask}}>
+            <TaskContext.Provider value={{task, setTask, modifyState, setModifyState}}>
             <div className="column">
                 <SchedulerTable/>
             </div>

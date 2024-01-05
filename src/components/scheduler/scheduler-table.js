@@ -8,7 +8,7 @@ export default function SchedulerTable()
     const [tasks, setTasks] = useState([]);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
-    const {task, setTask} = useContext(TaskContext);
+    const {task, setTask, setModifyState} = useContext(TaskContext);
 
     /*setTasks({
         name: "paolo",
@@ -53,6 +53,7 @@ export default function SchedulerTable()
     const handleClick = (event, row) =>
     {
         setTask(row);
+        setModifyState(true);
         console.log("clicked on: "+task.taskName);
     }
 

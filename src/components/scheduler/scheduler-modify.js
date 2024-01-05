@@ -4,8 +4,8 @@ import { TaskContext } from "./scheduler-view";
 
 export default function SchedulerModify()
 {
-    const [modifyState, setModifyState] = useState(false);
-    const {task, setTask} = useContext(TaskContext);
+
+    const {task, setTask, modifyState, setModifyState} = useContext(TaskContext);
 
     const handleClick = () =>
     {
@@ -16,16 +16,32 @@ export default function SchedulerModify()
             state: schedulingState
         }*/
         //SOLO aggiunta custom
-        fetch('http://localhost:8080/scheduler/custom', 
+        if(!modifyState)
         {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: "POST",
-            body: JSON.stringify(task)
-        }).then(response => response.ok? console.log("Sucessful") : console.error("rejected")
-        ).catch(err => console.log(err))
+            fetch('http://localhost:8080/scheduler/custom',
+            {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: JSON.stringify(task)
+            }).then(response => response.ok? console.log("Sucessful") : console.error("rejected")
+            ).catch(err => console.log(err))
+        }
+        else
+        {
+            fetch('http://localhost:8080/scheduler/', 
+            {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "PUT",
+                body: JSON.stringify(task)
+            }).then(response => response.ok? console.log("Sucessful") : console.error("rejected")
+            ).catch(err => console.log(err))
+        }
     }
 
     const handleChangeTaskName = event =>
